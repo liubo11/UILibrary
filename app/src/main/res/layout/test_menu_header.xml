@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#70008000"
+    android:gravity="center"
+    android:layout_height="220dp">
+
+    <ImageView
+        android:layout_width="86dp"
+        android:src="@drawable/ic_launcher"
+        android:padding="8dp"
+        android:layout_height="86dp" />
+
+</LinearLayout>

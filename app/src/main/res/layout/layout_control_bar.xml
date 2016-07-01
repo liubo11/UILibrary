@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/base_control_bar"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/control_bar_fit_sysm">
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="wrap_content"
+        app:mrl_rippleColor="@color/white_80"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/cb_back"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/img_cb_back"
+            android:padding="10dp"/>
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+    <TextView
+        android:id="@+id/cb_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/app_name"
+        />
+
+</RelativeLayout>
