@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.demo.main.R;
 import com.galaxywind.base.adapter.HeaderRecyclerAdapter;
+import com.galaxywind.base.adapter.LinearDecoration;
 import com.galaxywind.utils.ColorUtils;
 import com.galaxywind.utils.ViewUtils;
 import com.google.android.gms.appindexing.AppIndex;
@@ -40,12 +41,6 @@ import java.util.ArrayList;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +50,6 @@ public class BaseActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -143,83 +135,9 @@ public class BaseActivity extends AppCompatActivity {
         rView.setLayoutManager(llManager);
         rView.setHasFixedSize(true);
         rView.setItemAnimator(new DefaultItemAnimator());
-        rView.addItemDecoration(new MyDecoration(this, MyDecoration.VERTICAL_LIST));
+        rView.addItemDecoration(new LinearDecoration(this, LinearDecoration.VERTICAL_LIST));
         rView.setAdapter(adapter);
     }
-
-    private class MyDecoration extends RecyclerView.ItemDecoration {
-        public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
-        public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
-        private int mOrientation;
-        private int mDividerSize = 4;
-        private Paint mPaint;
-
-        public MyDecoration(Context context, int orientation) {
-            setOrientation(orientation);
-            mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            mPaint.setColor(0x80FFFFFF & ColorUtils.getRandomColor());
-            mPaint.setStyle(Paint.Style.FILL);
-        }
-
-        public void setOrientation(int orientation) {
-            if (orientation != HORIZONTAL_LIST && orientation != VERTICAL_LIST) {
-                throw new IllegalArgumentException("invalid orientation");
-            }
-            mOrientation = orientation;
-        }
-
-        @Override
-        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-            super.onDraw(c, parent, state);
-            System.out.println("ondraw " + state);
-            //c.drawColor(getRandomColor());
-            //c.drawColor(Color.GRAY);
-            if (mOrientation == VERTICAL_LIST) {
-                drawVertical(c, parent);
-            } else {
-                drawHorizontal(c, parent);
-            }
-        }
-
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            outRect.set(0, 0, 0, 4);
-            System.out.println("getItemOffsets outRect=" + outRect + ",state=" + state);
-        }
-
-        public void drawVertical(Canvas c, RecyclerView parent) {
-            final int left = parent.getPaddingLeft() + 20;
-            final int right = parent.getWidth() - parent.getPaddingRight();
-
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-                final int top = child.getBottom() + params.bottomMargin;
-                final int bottom = top + mDividerSize;
-
-                c.drawRect(left, top, right, bottom, mPaint);
-            }
-        }
-
-        public void drawHorizontal(Canvas c, RecyclerView parent) {
-            final int top = parent.getPaddingTop();
-            final int bottom = parent.getHeight() - parent.getPaddingBottom();
-
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-                final int left = child.getRight() + params.rightMargin;
-                final int right = left + mDividerSize;
-
-                c.drawRect(left, top, right, bottom, mPaint);
-            }
-        }
-    }
-
     private class MyRecyclerAdapter extends HeaderRecyclerAdapter<Integer> {
 
         private ArrayList<Integer> datas;
