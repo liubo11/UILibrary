@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.demo.main.R;
+import com.galaxywind.base.R;
+
 
 /**
  * Created by Administrator on 2016-06-29.
