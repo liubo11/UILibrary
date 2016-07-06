@@ -5,12 +5,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v4.view.GravityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +17,28 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.galaxywind.base.R;
-import com.galaxywind.base.adapter.LinearDecoration;
+import com.galaxywind.base.fragment.FragmentFactory;
+import com.galaxywind.base.fragment.impl.ICtrlBar;
+import com.galaxywind.base.fragment.impl.IMoreMenu;
+
 /**
  * Created by Administrator on 2016-06-29.
  */
 public class BaseActivity extends AppCompatActivity {
-    private DrawerLayout mDrawer;
+
+    private static final String FM_TAG_CONTROL_BAR = "com.base.baseactivity.contrlbar";
+    private static final String FM_TAG_MORE_MEMU = "com.base.baseacitivity.moremenu";
+
+    protected ICtrlBar mCtrlBar;
+    protected IMoreMenu mMoreMenu;
+
+    protected Bundle mSaveInstacneState;
+
+    public enum MenuStyle {
+        LEFT,
+        RIGHT
+    }
+    private MenuStyle mMenuStyle = MenuStyle.LEFT;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,12 +50,16 @@ public class BaseActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        if (null != savedInstanceState) {
+            mSaveInstacneState = new Bundle(savedInstanceState);
+        }
     }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(R.layout.layout_base_activity);
-        ViewGroup viewGroup = null;//(ViewGroup) findViewById(R.id.container);
+        ViewGroup viewGroup = (ViewGroup) findViewById(R.id.container);
         setContent_(LayoutInflater.from(this).inflate(layoutResID, viewGroup, false), null);
     }
 
@@ -65,55 +83,48 @@ public class BaseActivity extends AppCompatActivity {
         } else {
             viewGroup.addView(view);
         }
-        mDrawer = (DrawerLayout) findViewById(R.id.base_drawer);
-        mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        bindLeftClick();
-    }
+        FragmentManager fm = getSupportFragmentManager();
+        if (null == mSaveInstacneState) {
+            FragmentTransaction ft = fm.beginTransaction();
 
-    private void bindLeftClick() {
-        setCBLeftClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                opposeLeftDrawer();
-            }
-        });
-    }
+            BaseFragment ctrlBar = createControlBar();
+            BaseFragment moreMenu = createMoreMenu();
 
-    private void opposeLeftDrawer() {
-        if (mDrawer != null) {
-            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                mDrawer.closeDrawers();
-            } else {
-                mDrawer.openDrawer(GravityCompat.START);
-            }
+            ft.add(R.id.frame_ctrl_bar, ctrlBar, FM_TAG_CONTROL_BAR);
+            ft.add(R.id.frame_more_menu, moreMenu, FM_TAG_MORE_MEMU);
+
+            mCtrlBar = (ICtrlBar) ctrlBar;
+            mMoreMenu = (IMoreMenu) moreMenu;
+            ft.commit();
+        } else {
+            mCtrlBar = (ICtrlBar) fm.findFragmentByTag(FM_TAG_CONTROL_BAR);
+            mMoreMenu = (IMoreMenu) fm.findFragmentByTag(FM_TAG_MORE_MEMU);
         }
+
+        mMoreMenu.bindDrawer((DrawerLayout) findViewById(R.id.base_drawer));
     }
 
-    protected void setCBLeftClickListener(View.OnClickListener listener) {
-        findViewById(R.id.cb_back).setOnClickListener(listener);
+    protected void setMenuStyle(MenuStyle menuStyle) {
+        this.mMenuStyle = menuStyle;
+    }
+
+    protected BaseFragment createControlBar() {
+        return FragmentFactory.newControlBar();
+    }
+
+    protected BaseFragment createMoreMenu() {
+        return FragmentFactory.newMoreMenu(mMenuStyle);
+    }
+
+    public ICtrlBar getControlBar() {
+        return mCtrlBar;
+    }
+    public IMoreMenu getMoreMenu() {
+        return mMoreMenu;
     }
 
     protected void startActivity(Class<?> clazz) {
         startActivity(new Intent(this, clazz));
     }
-
-
-    /*
-     * after setContentView
-     */
-    protected void initMenuList(RecyclerView.Adapter adapter) {
-        RecyclerView rView = (RecyclerView) findViewById(R.id.base_menu_list);
-        LinearLayoutManager llManager = new LinearLayoutManager(this);
-
-        llManager.setOrientation(LinearLayoutManager.VERTICAL);
-        llManager.setSmoothScrollbarEnabled(true);
-
-        rView.setLayoutManager(llManager);
-        rView.setHasFixedSize(true);
-        rView.setItemAnimator(new DefaultItemAnimator());
-        rView.addItemDecoration(new LinearDecoration(this, LinearDecoration.VERTICAL_LIST));
-        rView.setAdapter(adapter);
-    }
-
 }

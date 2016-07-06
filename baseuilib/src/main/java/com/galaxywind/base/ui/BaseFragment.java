@@ -3,34 +3,28 @@ package com.galaxywind.base.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2016-06-29.
  */
 public class BaseFragment extends Fragment {
-
-
-
-    public static Fragment newInstance(Class<?> clazz, Bundle extra) {
-        try {
-            BaseFragment fragment = (BaseFragment) clazz.newInstance();
-            fragment.setArguments(extra);
-            return  fragment;
-        } catch (java.lang.InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
+    protected Bundle mExtra;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mExtra = getArguments();
+    }
 
-        Bundle extra = getArguments();
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 
+    public BaseFragment() {
+        //do not call directly
     }
 }

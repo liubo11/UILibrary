@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Created by Administrator on 2016-07-01.
  */
-public class BaseTabAdapter extends FragmentStatePagerAdapter{
+public class SimpleTabAdapter extends FragmentStatePagerAdapter{
     private List<? extends Fragment> mPagers;
 
-    public BaseTabAdapter(@NonNull FragmentManager fm, @NonNull List<? extends Fragment> pagers) {
+    public SimpleTabAdapter(@NonNull FragmentManager fm, @NonNull List<? extends Fragment> pagers) {
         super(fm);
         this.mPagers = pagers;
     }

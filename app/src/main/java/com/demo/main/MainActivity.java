@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.galaxywind.base.adapter.HeaderRecyclerAdapter;
+import com.galaxywind.base.adapter.LinearDecoration;
 import com.galaxywind.base.ui.BaseActivity;
 import com.galaxywind.utils.ViewUtils;
 
@@ -36,10 +39,9 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
-
+        /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);
-        initMenuList(adapter);
+        initMenuList(adapter);*/
     }
 
     private class MyRecyclerAdapter extends HeaderRecyclerAdapter<Integer> {
@@ -98,5 +100,24 @@ public class MainActivity extends BaseActivity {
             return ViewUtils.buildColorBackgroundDrawable(
                     0, 0, 0x80ff0000, 0xFFFFFFFF);
         }
+    }
+
+    /*
+     * after setContentView
+     */
+    protected void initMenuList(RecyclerView.Adapter adapter) {
+
+
+       /* RecyclerView rView = (RecyclerView) findViewById(com.galaxywind.base.R.id.base_menu_list);
+        LinearLayoutManager llManager = new LinearLayoutManager(this);
+
+        llManager.setOrientation(LinearLayoutManager.VERTICAL);
+        llManager.setSmoothScrollbarEnabled(true);
+
+        rView.setLayoutManager(llManager);
+        rView.setHasFixedSize(true);
+        rView.setItemAnimator(new DefaultItemAnimator());
+        rView.addItemDecoration(new LinearDecoration(this, LinearDecoration.VERTICAL_LIST));
+        rView.setAdapter(adapter);*/
     }
 }

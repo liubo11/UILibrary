@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="control_bar_fit_sysm">25dp</dimen>
+    <dimen name="control_bar_fit_sys">25dp</dimen>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
