@@ -20,20 +20,19 @@ import com.galaxywind.utils.Logger;
  */
 public class LeftMenuFragment extends BaseFragment implements IMoreMenu {
 
-    private ViewGroup mContainer;
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        Logger.d("More menu fragment create view");
-        mContainer = container;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.layout_more_menu);
+        Logger.d("More menu fragment created");
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         initDrawerStyle();
-
-        View view = inflater.inflate(R.layout.layout_more_menu, container, false);
-        view.setBackgroundColor(ColorUtils.getRandomColor());
-
-        return view;
+        mRootView.setBackgroundColor(ColorUtils.getRandomColor());
     }
 
     private void initDrawerStyle() {
@@ -57,16 +56,20 @@ public class LeftMenuFragment extends BaseFragment implements IMoreMenu {
 
     @Override
     public void closeMenu() {
-
+        if (isCreatedView()) {
+            mDrawer.closeDrawers();
+        }
     }
 
     @Override
     public void openMenu() {
-
+        if (isCreatedView()) {
+            mDrawer.openDrawer(GravityCompat.START);
+        }
     }
 
     @Override
     public void bindDrawer(DrawerLayout drawer) {
-
+        this.mDrawer = drawer;
     }
 }

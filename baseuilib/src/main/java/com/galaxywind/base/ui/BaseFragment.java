@@ -1,6 +1,8 @@
 package com.galaxywind.base.ui;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,20 +13,69 @@ import android.view.ViewGroup;
  * Created by Administrator on 2016-06-29.
  */
 public class BaseFragment extends Fragment {
+
+    protected ViewGroup mContainer;
+    protected View mRootView;
+
+    private int mRootLayout;
+
     protected Bundle mExtra;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mExtra = getArguments();
+
+
+    }
+
+    protected void setContentView(@LayoutRes int layout) {
+        this.mRootLayout = layout;
+    }
+    protected void setContentView(View view) {
+        this.mRootView = view;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mContainer = container;
+        if (mRootView != null) {
+            return mRootView;
+        } else if (mRootLayout != 0) {
+            mRootView = inflater.inflate(mRootLayout, container, false);
+            return mRootView;
+        }
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (mRootView == null) {
+            mRootView = getView();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRootView = null;
+        mContainer = null;
+    }
+
+    public boolean isCreatedView() {
+        return mRootView != null;
     }
 
     public BaseFragment() {
         //do not call directly
+    }
+
+    public <T> T findViewById(@IdRes int id) {
+        if (isCreatedView()) {
+            return (T) mRootView.findViewById(id);
+        }
+        return null;
     }
 }

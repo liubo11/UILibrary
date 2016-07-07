@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 import com.galaxywind.base.adapter.HeaderRecyclerAdapter;
 import com.galaxywind.base.adapter.LinearDecoration;
+import com.galaxywind.base.fragment.impl.ICtrlBar;
+import com.galaxywind.base.fragment.impl.IMoreMenu;
 import com.galaxywind.base.ui.BaseActivity;
 import com.galaxywind.utils.ViewUtils;
 
@@ -25,6 +29,8 @@ import java.util.ArrayList;
  */
 public class MainActivity extends BaseActivity {
 
+
+    private String title="123";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +44,25 @@ public class MainActivity extends BaseActivity {
                 startActivity(TabActivity.class);
             }
         });
+
+        final ICtrlBar ctrlBar = getControlBar();
+        final IMoreMenu moreMenu = getMoreMenu();
+
+        ctrlBar.addLeftButton(R.drawable.img_cb_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moreMenu.openMenu();
+            }
+        });
+        ctrlBar.setTitle("123asdfasdfadf");
+        ctrlBar.addRightButton(R.drawable.img_cb_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title+="123";
+                ctrlBar.setTitle(title);
+            }
+        });
+
 
         /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);

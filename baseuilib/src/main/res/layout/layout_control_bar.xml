@@ -18,9 +18,12 @@
         android:id="@+id/cb_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/control_bar_size"
+        android:paddingLeft="@dimen/control_bar_text_padding"
+        android:paddingRight="@dimen/control_bar_text_padding"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="#FFFFFF"
+        android:singleLine="true"
+        android:textColor="@color/control_bar_title_color"
         android:textSize="@dimen/control_bar_title_text_size" />
 
     <LinearLayout

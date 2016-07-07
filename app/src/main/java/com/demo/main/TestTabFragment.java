@@ -25,7 +25,24 @@ public class TestTabFragment extends BaseFragment {
         if (null != mMsg) {
             mTextView.setText(mMsg);
         }
+
+        System.out.println("oncreateView isCreatedView="+isCreatedView());
+
+
         return  vg;
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        System.out.println("onCreate isCreatedView="+isCreatedView());
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        System.out.println("onViewCreated isCreatedView="+isCreatedView());
     }
 
     public void setText(@Nullable String msg) {

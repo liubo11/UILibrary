@@ -17,16 +17,12 @@ public interface ICtrlBar {
     void addRightButton(@DrawableRes int drawable, View.OnClickListener listener);
     void addRightTextButton(@StringRes int text, View.OnClickListener listener);
 
+    void notifyChanged();
+
     void clearLeftAdded();
     void clearRightAdded();
 
     void setTitle(CharSequence title);
     void setTitleColor(@ColorInt int color);
-
-    /**
-     * @param size px, def 16dp
-     */
-    void setTitleSize(int size);
     void setBarBackgroud(Drawable drawable);
-    void setImmersedStyle(boolean immersedStyle);
 }

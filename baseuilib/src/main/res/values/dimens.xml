@@ -3,6 +3,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="control_bar_mark_size">8dp</dimen>
+    <dimen name="control_bar_icon_padding">8dp</dimen>
+    <dimen name="control_bar_text_padding">8dp</dimen>
     <dimen name="control_bar_fit_sys">0dp</dimen>
     <dimen name="control_bar_size">56dp</dimen>
     <dimen name="control_bar_title_text_size">16dp</dimen>
