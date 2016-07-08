@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016-07-01.
+ * 还需要完善 可以参考 Design包中NavigationView实现
  */
 public abstract class HeaderRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

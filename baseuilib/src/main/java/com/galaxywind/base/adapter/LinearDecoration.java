@@ -12,6 +12,7 @@ import com.galaxywind.utils.ColorUtils;
 
 /**
  * Created by Administrator on 2016-07-01.
+ *
  */
 public class LinearDecoration extends RecyclerView.ItemDecoration {
     public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
@@ -37,7 +38,6 @@ public class LinearDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
-        System.out.println("ondraw " + state);
         //c.drawColor(getRandomColor());
         //c.drawColor(Color.GRAY);
         if (mOrientation == VERTICAL_LIST) {
@@ -51,8 +51,7 @@ public class LinearDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        outRect.set(0, 0, 0, 4);
-        System.out.println("getItemOffsets outRect=" + outRect + ",state=" + state);
+        outRect.set(0, 0, 0, mDividerSize);
     }
 
     public void drawVertical(Canvas c, RecyclerView parent) {
@@ -65,6 +64,7 @@ public class LinearDecoration extends RecyclerView.ItemDecoration {
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             final int top = child.getBottom() + params.bottomMargin;
             final int bottom = top + mDividerSize;
+
 
             c.drawRect(left, top, right, bottom, mPaint);
         }

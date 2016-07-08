@@ -105,8 +105,9 @@ public class ControlBarFragment extends BaseFragment implements ICtrlBar {
     @Override
     public void notifyChanged() {
         if (isInflated()) {
-            int leftPadding = mLeftBtnList.size() * mItemSize + mTitleDefPadding;
-            int rightPadding = mRightBtnList.size() * mItemSize + mTitleDefPadding;
+            int maxSize = Math.max(mLeftBtnList.size(), mRightBtnList.size());
+            int leftPadding = maxSize * mItemSize + mTitleDefPadding;
+            int rightPadding = leftPadding;
             int topPadding = mTitleView.getPaddingTop();
             int bottomPadding = mTitleView.getPaddingBottom();
             mTitleView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);

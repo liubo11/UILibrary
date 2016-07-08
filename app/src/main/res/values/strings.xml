@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DemoAnotherProject</string>
+
+    <string name="test_next">下一步</string>
 </resources>

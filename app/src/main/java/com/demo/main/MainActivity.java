@@ -63,6 +63,15 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        ctrlBar.addRightTextButton(R.string.test_next, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title+="456";
+                ctrlBar.setTitle(title);
+            }
+        });
+        ctrlBar.notifyChanged();
+
 
         /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);

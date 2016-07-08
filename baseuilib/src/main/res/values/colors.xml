@@ -8,6 +8,7 @@
     <color name="white_30">#4CFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
 
+    <color name="control_bar_item_text_color">#FFFFFF</color>
     <color name="control_bar_title_color">#FFFFFF</color>
     <color name="control_bar_mark">#FF0000</color>
 
