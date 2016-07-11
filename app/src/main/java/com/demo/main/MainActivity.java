@@ -28,16 +28,28 @@ import java.util.ArrayList;
  * Created by Administrator on 2016-06-29.
  */
 public class MainActivity extends BaseActivity {
-
-
     private String title="123";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
+        adapter.setHeaderView(R.layout.test_menu_header);
+        initMenuList(adapter);*/
+    }
 
+    @Override
+    protected void initField() {
+
+    }
+
+    @Override
+    protected void setContent() {
         setContentView(R.layout.test_main_activity);
+    }
 
+    @Override
+    protected void initView() {
         findViewById(R.id.text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,12 +83,14 @@ public class MainActivity extends BaseActivity {
             }
         });
         ctrlBar.notifyChanged();
-
-
-        /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
-        adapter.setHeaderView(R.layout.test_menu_header);
-        initMenuList(adapter);*/
     }
+
+    @Override
+    protected void initDatas() {
+
+    }
+
+
 
     private class MyRecyclerAdapter extends HeaderRecyclerAdapter<Integer> {
 

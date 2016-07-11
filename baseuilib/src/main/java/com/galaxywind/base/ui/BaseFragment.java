@@ -12,8 +12,7 @@ import android.view.ViewGroup;
 /**
  * Created by Administrator on 2016-06-29.
  */
-public class BaseFragment extends Fragment {
-
+public abstract class BaseFragment extends Fragment {
     protected ViewGroup mContainer;
     protected View mRootView;
 
@@ -26,8 +25,30 @@ public class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mExtra = getArguments();
 
-
+        initField();
+        setContent();
     }
+
+    /**
+     * 初始化类属性
+     */
+    protected abstract void initField();
+
+    /**
+     * 设置布局
+     * <p>{@link #setContentView(int)}
+     * <p>{@link #setContentView(View)}
+    */
+    protected abstract void setContent();
+    /**
+     * 初始化控件 监听事件
+     */
+    protected abstract void initView();
+
+    /**
+     * 初始化数据，比如adapter
+     */
+    protected abstract void initDatas();
 
     protected void setContentView(@LayoutRes int layout) {
         this.mRootLayout = layout;
@@ -55,6 +76,8 @@ public class BaseFragment extends Fragment {
         if (mRootView == null) {
             mRootView = getView();
         }
+        initView();
+        initDatas();
     }
 
     @Override

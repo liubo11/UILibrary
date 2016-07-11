@@ -24,7 +24,7 @@ import com.galaxywind.base.fragment.impl.IMoreMenu;
 /**
  * Created by Administrator on 2016-06-29.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private static final String FM_TAG_CONTROL_BAR = "com.base.baseactivity.contrlbar";
     private static final String FM_TAG_MORE_MEMU = "com.base.baseacitivity.moremenu";
@@ -35,25 +35,51 @@ public class BaseActivity extends AppCompatActivity {
     protected Bundle mSaveInstacneState;
 
     public enum MenuStyle {
+        NONE,
         LEFT,
         RIGHT
     }
     private MenuStyle mMenuStyle = MenuStyle.LEFT;
 
+    final public ICtrlBar getControlBar() {
+        return mCtrlBar;
+    }
+    final public IMoreMenu getMoreMenu() {
+        return mMoreMenu;
+    }
+
+    /**
+     * 初始化类属性，比如：获取上个页面的extra数据
+     */
+    protected abstract void initField();
+    /**
+     * 设置布局
+     * <p>{@link #setContentView(int)}
+     * <p>{@link #setContentView(View)}
+     * <p>{@link #setContentView(View, ViewGroup.LayoutParams)}
+     */
+    protected abstract void setContent();
+    /**
+     * 初始化控件 监听事件
+     */
+    protected abstract void initView();
+    /**
+     * 初始化数据，比如adapter
+     */
+    protected abstract void initDatas();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-
-            window.setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
         if (null != savedInstanceState) {
             mSaveInstacneState = new Bundle(savedInstanceState);
         }
+
+        initField();
+        super.onCreate(savedInstanceState);
+        initStatusBar();
+        setContent();
+        initView();
+        initDatas();
     }
 
     @Override
@@ -75,6 +101,49 @@ public class BaseActivity extends AppCompatActivity {
         setContent_(view, params);
     }
 
+
+    /**
+     * 设置MoreMenu样式
+     * @param menuStyle
+     */
+    final protected void setMenuStyle(MenuStyle menuStyle) {
+        this.mMenuStyle = menuStyle;
+    }
+
+    /**
+     * 用于重写ControlBar
+     * @return ICtrlBar
+     */
+    protected BaseFragment createControlBar() {
+        return FragmentFactory.newControlBar();
+    }
+
+    /**
+     * 用于重写MoreMenu
+     * @return IMoreMenu
+     */
+    protected BaseFragment createMoreMenu() {
+        return FragmentFactory.newMoreMenu(mMenuStyle);
+    }
+
+    /**
+     * 启动一个Activity，不带参数
+     * @param clazz
+     */
+    final protected void startActivity(Class<?> clazz) {
+        startActivity(new Intent(this, clazz));
+    }
+
+    private void initStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+
+            window.setFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
     private void setContent_(View view, ViewGroup.LayoutParams params) {
         ViewGroup viewGroup = (ViewGroup) findViewById(R.id.container);
         if (null != params) {
@@ -82,6 +151,13 @@ public class BaseActivity extends AppCompatActivity {
             viewGroup.addView(view, lp);
         } else {
             viewGroup.addView(view);
+        }
+
+        initMoreMenu();
+    }
+    private void initMoreMenu() {
+        if (mMenuStyle == MenuStyle.NONE) {
+            return;
         }
 
         FragmentManager fm = getSupportFragmentManager();
@@ -103,28 +179,5 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         mMoreMenu.bindDrawer((DrawerLayout) findViewById(R.id.base_drawer));
-    }
-
-    protected void setMenuStyle(MenuStyle menuStyle) {
-        this.mMenuStyle = menuStyle;
-    }
-
-    protected BaseFragment createControlBar() {
-        return FragmentFactory.newControlBar();
-    }
-
-    protected BaseFragment createMoreMenu() {
-        return FragmentFactory.newMoreMenu(mMenuStyle);
-    }
-
-    public ICtrlBar getControlBar() {
-        return mCtrlBar;
-    }
-    public IMoreMenu getMoreMenu() {
-        return mMoreMenu;
-    }
-
-    protected void startActivity(Class<?> clazz) {
-        startActivity(new Intent(this, clazz));
     }
 }

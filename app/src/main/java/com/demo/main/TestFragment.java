@@ -14,14 +14,28 @@ import com.galaxywind.base.ui.BaseFragment;
  */
 public class TestFragment extends BaseFragment {
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.test_fragment_layout, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-        //TextView tv = vg.findViewById(R.id.)
+    @Override
+    protected void initField() {
 
-        return  vg;
+    }
+
+    @Override
+    protected void setContent() {
+        setContentView(R.layout.test_fragment_layout);
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initDatas() {
+
     }
 }

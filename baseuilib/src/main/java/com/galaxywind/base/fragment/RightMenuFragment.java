@@ -8,19 +8,15 @@ import com.galaxywind.base.ui.BaseFragment;
 /**
  * Created by Administrator on 2016-07-06.
  */
-public class RightMenuFragment extends BaseFragment implements IMoreMenu {
+public class RightMenuFragment extends WujiaMenuFragment {
+
     @Override
-    public void closeMenu() {
+    protected void initField() {
 
     }
 
     @Override
-    public void openMenu() {
-
-    }
-
-    @Override
-    public void bindDrawer(DrawerLayout drawer) {
+    protected void initDatas() {
 
     }
 }

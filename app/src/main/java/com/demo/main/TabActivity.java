@@ -15,11 +15,13 @@ import java.util.ArrayList;
  * Created by Administrator on 2016-07-01.
  */
 public class TabActivity extends BaseTabActivity {
+    @Override
+    protected void initField() {
+
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    protected void initView() {
         ArrayList<TestTabFragment> fmList = new ArrayList<>();
 
         TestTabFragment ttf = FragmentFactory.newFragmentInstance(TestTabFragment.class, new Bundle());
@@ -48,6 +50,11 @@ public class TabActivity extends BaseTabActivity {
         list.add(mTablayout.newTab().setText("Secend").setIcon(R.drawable.ic_launcher));
         list.add(mTablayout.newTab().setText("Third").setIcon(R.drawable.ic_launcher));
 
-        initTab(adapter, list);
+        setTabs(adapter, list);
+    }
+
+    @Override
+    protected void initDatas() {
+
     }
 }

@@ -4,10 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +43,11 @@ public class ControlBarFragment extends BaseFragment implements ICtrlBar {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_control_bar);
         Logger.d("Control bar fragment created");
+    }
 
+    @Override
+    protected void initField() {
         mMarkColor = getResources().getColor(R.color.control_bar_mark);
         mMarkSize = getResources().getDimensionPixelSize(R.dimen.control_bar_mark_size);
         mItemSize = getResources().getDimensionPixelSize(R.dimen.control_bar_size);
@@ -55,15 +55,23 @@ public class ControlBarFragment extends BaseFragment implements ICtrlBar {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void setContent() {
+        setContentView(R.layout.layout_control_bar);
+    }
 
+    @Override
+    protected void initView() {
         mLeftContainer = findViewById(R.id.cb_left_container);
         mRightContainer = findViewById(R.id.cb_right_container);
         mTitleView = findViewById(R.id.cb_title);
 
         refreshCtrlBar();
         notifyChanged();
+    }
+
+    @Override
+    protected void initDatas() {
+
     }
 
     @Override

@@ -16,23 +16,6 @@ public class TestTabFragment extends BaseFragment {
     private TextView mTextView;
     private String mMsg;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.test_tab_fragment_layout, container, false);
-        mTextView = (TextView) vg.findViewById(R.id.text);
-        if (null != mMsg) {
-            mTextView.setText(mMsg);
-        }
-
-        System.out.println("oncreateView isCreatedView="+isCreatedView());
-
-
-        return  vg;
-
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +23,26 @@ public class TestTabFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        System.out.println("onViewCreated isCreatedView="+isCreatedView());
+    protected void initField() {
+
+    }
+
+    @Override
+    protected void setContent() {
+        setContentView(R.layout.test_tab_fragment_layout);
+    }
+
+    @Override
+    protected void initView() {
+        mTextView = (TextView) mRootView.findViewById(R.id.text);
+        if (null != mMsg) {
+            mTextView.setText(mMsg);
+        }
+    }
+
+    @Override
+    protected void initDatas() {
+
     }
 
     public void setText(@Nullable String msg) {

@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -150,5 +151,9 @@ public final class ViewUtils {
 									selectedColor != 0 ? new ColorDrawable(selectedColor) : null,
 									pressedColor != 0 ? new ColorDrawable(pressedColor) : null,
 									normalColor != 0 ? new ColorDrawable(normalColor) : null);
+	}
+
+	public static int dp2px(@NonNull  Context context, int dp) {
+		return Math.round(context.getResources().getDisplayMetrics().density * dp);
 	}
 }

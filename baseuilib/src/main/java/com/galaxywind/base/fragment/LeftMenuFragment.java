@@ -18,58 +18,16 @@ import com.galaxywind.utils.Logger;
 /**
  * Created by Administrator on 2016-07-05.
  */
-public class LeftMenuFragment extends BaseFragment implements IMoreMenu {
+public class LeftMenuFragment extends WujiaMenuFragment {
+
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_more_menu);
-        Logger.d("More menu fragment created");
-    }
+    protected void initField() {
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        initDrawerStyle();
-        mRootView.setBackgroundColor(ColorUtils.getRandomColor());
-    }
-
-    private void initDrawerStyle() {
-        if (mContainer.getParent() instanceof DrawerLayout) {
-            DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) mContainer.getLayoutParams();
-            lp.gravity = Gravity.LEFT;
-        }
-    }
-
-    private DrawerLayout mDrawer;
-
-    private void opposeLeftDrawer() {
-        if (mDrawer != null) {
-            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                mDrawer.closeDrawers();
-            } else {
-                mDrawer.openDrawer(GravityCompat.START);
-            }
-        }
     }
 
     @Override
-    public void closeMenu() {
-        if (isCreatedView()) {
-            mDrawer.closeDrawers();
-        }
-    }
+    protected void initDatas() {
 
-    @Override
-    public void openMenu() {
-        if (isCreatedView()) {
-            mDrawer.openDrawer(GravityCompat.START);
-        }
-    }
-
-    @Override
-    public void bindDrawer(DrawerLayout drawer) {
-        this.mDrawer = drawer;
     }
 }
