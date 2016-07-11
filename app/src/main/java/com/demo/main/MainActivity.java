@@ -53,7 +53,8 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(TabActivity.class);
+                System.out.println("click time");
+                BaseActivity.startActivity(v.getContext(), TabActivity.class);
             }
         });
 
@@ -150,9 +151,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    /*
-     * after setContentView
-     */
     protected void initMenuList(RecyclerView.Adapter adapter) {
 
 

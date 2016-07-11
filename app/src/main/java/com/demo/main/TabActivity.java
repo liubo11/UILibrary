@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.galaxywind.base.adapter.SimpleTabAdapter;
 import com.galaxywind.base.fragment.FragmentFactory;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class TabActivity extends BaseTabActivity {
     @Override
     protected void initField() {
-
+        setMenuStyle(MenuStyle.NONE);
     }
 
     @Override
@@ -56,5 +57,10 @@ public class TabActivity extends BaseTabActivity {
     @Override
     protected void initDatas() {
 
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        Toast.makeText(this, tab.getText(), Toast.LENGTH_SHORT).show();
     }
 }
