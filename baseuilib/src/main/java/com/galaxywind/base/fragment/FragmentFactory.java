@@ -9,7 +9,6 @@ import com.galaxywind.base.ui.BaseFragment;
  * Created by Administrator on 2016-07-06.
  */
 public class FragmentFactory {
-
     public static final String EXTRA_KEY_USER_HANDLE = "com.base.basefragment.userhandle";
     public static final String EXTRA_KEY_COMM_ID = "com.base.basefragment.commid";
     public static final String EXTRA_KEY_HANDLE = "com.base.basefragment.handle";
@@ -28,15 +27,13 @@ public class FragmentFactory {
         return extra;
     }
 
-    public static ControlBarFragment newControlBar() {
+    public static ControlBarFragment newControlBar(BaseActivity.CtrlBarStyle barStyle) {
         return newFragmentInstance(ControlBarFragment.class, new Bundle());
     }
 
     public static LeftMenuFragment newMoreMenu(BaseActivity.MenuStyle menuStyle) {
         return newFragmentInstance(LeftMenuFragment.class, new Bundle());
     }
-
-
 
     public static <T extends BaseFragment>T newFragmentInstance(Class<T> clazz, Bundle extra) {
         try {

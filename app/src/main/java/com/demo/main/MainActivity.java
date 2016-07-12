@@ -1,5 +1,6 @@
 package com.demo.main;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,8 @@ public class MainActivity extends BaseActivity {
         /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);
         initMenuList(adapter);*/
+
+        System.out.println("MainActivity onCreate !!");
     }
 
     @Override
@@ -91,7 +94,30 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private Configuration conf;
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
 
+        if (conf != null) {
+            System.out.println("MainActivity diff="+newConfig.diff(conf));
+        }
+        conf = new Configuration(newConfig);
+
+        System.out.println("MainActivity onConfigurationChanged="+newConfig.toString());
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("config", conf);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        conf = savedInstanceState.getParcelable("config");
+    }
 
     private class MyRecyclerAdapter extends HeaderRecyclerAdapter<Integer> {
 

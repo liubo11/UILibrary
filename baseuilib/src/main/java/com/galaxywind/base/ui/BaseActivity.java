@@ -1,9 +1,11 @@
 package com.galaxywind.base.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import com.galaxywind.base.R;
 import com.galaxywind.base.fragment.FragmentFactory;
 import com.galaxywind.base.fragment.impl.ICtrlBar;
 import com.galaxywind.base.fragment.impl.IMoreMenu;
+import com.galaxywind.utils.AppTimeUtils;
 
 /**
  * Created by Administrator on 2016-06-29.
@@ -39,14 +42,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         LEFT,
         RIGHT
     }
-    private MenuStyle mMenuStyle = MenuStyle.LEFT;
 
-    final public ICtrlBar getControlBar() {
-        return mCtrlBar;
+    public enum CtrlBarStyle {
+        NONE,
+        DEF
     }
-    final public IMoreMenu getMoreMenu() {
-        return mMoreMenu;
-    }
+
+    private MenuStyle mMenuStyle = MenuStyle.LEFT;
+    private CtrlBarStyle mBarStyle = CtrlBarStyle.DEF;
 
     /**
      * 初始化类属性，比如：获取上个页面的extra数据
@@ -100,22 +103,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.setContentView(R.layout.layout_base_activity);
         setContent_(view, params);
     }
-
-
-    /**
-     * 设置MoreMenu样式
-     * @param menuStyle
-     */
-    final protected void setMenuStyle(MenuStyle menuStyle) {
-        this.mMenuStyle = menuStyle;
-    }
-
     /**
      * 用于重写ControlBar
      * @return ICtrlBar
      */
     protected BaseFragment createControlBar() {
-        return FragmentFactory.newControlBar();
+        return FragmentFactory.newControlBar(mBarStyle);
     }
 
     /**
@@ -126,12 +119,37 @@ public abstract class BaseActivity extends AppCompatActivity {
         return FragmentFactory.newMoreMenu(mMenuStyle);
     }
 
+    final public ICtrlBar getControlBar() {
+        return mCtrlBar;
+    }
+    final public IMoreMenu getMoreMenu() {
+        return mMoreMenu;
+    }
+
+    final protected boolean isSupportMoreMenu() {
+        return mMenuStyle != MenuStyle.NONE;
+    }
+
+    final protected boolean isSupportCtrlBar() {
+        return mBarStyle != CtrlBarStyle.NONE;
+    }
+
     /**
-     * 启动一个Activity，不带参数
-     * @param clazz
+     * 设置MoreMenu样式
+     * <p> initField()
+     * @param menuStyle
      */
-    final protected void startActivity(Class<?> clazz) {
-        startActivity(new Intent(this, clazz));
+    final protected void setMenuStyle(@NonNull MenuStyle menuStyle) {
+        this.mMenuStyle = menuStyle;
+    }
+
+    /**
+     * 设置CtrlBar样式
+     * <p> initField()
+     * @param barStyle
+     */
+    final protected void setCtrlBarStyle(@NonNull  CtrlBarStyle barStyle) {
+        this.mBarStyle = barStyle;
     }
 
     private void initStatusBar() {
@@ -153,31 +171,55 @@ public abstract class BaseActivity extends AppCompatActivity {
             viewGroup.addView(view);
         }
 
-        initMoreMenu();
+        initPageTitle();
     }
-    private void initMoreMenu() {
-        if (mMenuStyle == MenuStyle.NONE) {
-            return;
-        }
-
+    private void initPageTitle() {
         FragmentManager fm = getSupportFragmentManager();
         if (null == mSaveInstacneState) {
             FragmentTransaction ft = fm.beginTransaction();
 
-            BaseFragment ctrlBar = createControlBar();
-            BaseFragment moreMenu = createMoreMenu();
+            BaseFragment ctrlBar = isSupportCtrlBar() ? createControlBar() : null;
+            BaseFragment moreMenu = isSupportMoreMenu() ? createMoreMenu() : null;
 
-            ft.add(R.id.frame_ctrl_bar, ctrlBar, FM_TAG_CONTROL_BAR);
-            ft.add(R.id.frame_more_menu, moreMenu, FM_TAG_MORE_MEMU);
+            if (isSupportCtrlBar()) {
+                ft.add(R.id.frame_ctrl_bar, ctrlBar, FM_TAG_CONTROL_BAR);
+            }
+            if (isSupportMoreMenu()) {
+                ft.add(R.id.frame_more_menu, moreMenu, FM_TAG_MORE_MEMU);
+            }
 
             mCtrlBar = (ICtrlBar) ctrlBar;
             mMoreMenu = (IMoreMenu) moreMenu;
-            ft.commit();
+            if (isSupportCtrlBar() || isSupportMoreMenu()) {
+                ft.commit();
+            }
         } else {
             mCtrlBar = (ICtrlBar) fm.findFragmentByTag(FM_TAG_CONTROL_BAR);
             mMoreMenu = (IMoreMenu) fm.findFragmentByTag(FM_TAG_MORE_MEMU);
         }
 
-        mMoreMenu.bindDrawer((DrawerLayout) findViewById(R.id.base_drawer));
+        if (isSupportMoreMenu()) {
+            mMoreMenu.bindDrawer((DrawerLayout) findViewById(R.id.base_drawer));
+        }
+    }
+
+    public static void startActivity(Context context, Class<? extends BaseActivity> clazz) {
+        startActivity(context, new Intent(context, clazz));
+    }
+
+    public static void startActivity(Context context, Intent intent) {
+        if (AppTimeUtils.isValidStartActivityAction()) {
+            context.startActivity(intent);
+        }
+    }
+
+    public static void startActivityForResult(BaseActivity activity, Intent intent, int requestCode) {
+        if (AppTimeUtils.isValidStartActivityAction()) {
+            activity.startActivityForResult(intent, requestCode);
+        }
+    }
+
+    public static void startActivityImmediately(Context context, Class<? extends BaseActivity> clazz) {
+        context.startActivity(new Intent(context, clazz));
     }
 }

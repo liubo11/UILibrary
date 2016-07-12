@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016-06-29.
  */
-public abstract class BaseTabActivity extends BaseActivity {
+public abstract class BaseTabActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
     protected TabLayout mTablayout;
     protected ViewPager mViewPager;
 
@@ -62,5 +62,19 @@ public abstract class BaseTabActivity extends BaseActivity {
         for (int i = 0, j = tabs.size(); i < j; i++) {
             mTablayout.addTab(tabs.get(i), i);
         }
+
+        mTablayout.setOnTabSelectedListener(this);
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+    }
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
     }
 }

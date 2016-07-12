@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:layout_width="match_parent"
         app:mrl_rippleColor="@color/white_80"
-        android:layout_height="match_parent">
+        android:layout_height="56dp">
 
         <TextView
             android:id="@+id/text"
@@ -21,5 +22,10 @@
 
     </com.balysv.materialripple.MaterialRippleLayout>
 
+    <EditText
+        android:textSize="16sp"
+        android:hint="one1一壹,.;!，。；！"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
 
 </LinearLayout>

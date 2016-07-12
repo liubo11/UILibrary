@@ -17,6 +17,7 @@ import com.galaxywind.utils.Logger;
  * Created by Administrator on 2016-07-11.
  */
 public abstract class WujiaMenuFragment extends BaseFragment implements IMoreMenu {
+    private DrawerLayout mDrawer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,18 +40,6 @@ public abstract class WujiaMenuFragment extends BaseFragment implements IMoreMen
         if (mContainer.getParent() instanceof DrawerLayout) {
             DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) mContainer.getLayoutParams();
             lp.gravity = Gravity.LEFT;
-        }
-    }
-
-    private DrawerLayout mDrawer;
-
-    private void opposeLeftDrawer() {
-        if (mDrawer != null) {
-            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                mDrawer.closeDrawers();
-            } else {
-                mDrawer.openDrawer(GravityCompat.START);
-            }
         }
     }
 
