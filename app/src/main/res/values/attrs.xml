@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="theme_main_color" format="color"></attr>
+    <attr name="theme_drawable" format="reference"></attr>
+
+</resources>

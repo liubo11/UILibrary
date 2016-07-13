@@ -1,6 +1,7 @@
 package com.demo.main;
 
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +38,11 @@ public class MainActivity extends BaseActivity {
         /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);
         initMenuList(adapter);*/
+        long recorde = System.currentTimeMillis();
+        TypedArray array = getTheme().obtainStyledAttributes(new int[]{R.attr.theme_main_color});
+        int color = array.getColor(0, 0);
+        array.recycle();
+        System.out.println("xxxxxx time = "+(System.currentTimeMillis() - recorde)+" getcolor = "+Integer.toHexString(color));
 
         System.out.println("MainActivity onCreate !!");
     }

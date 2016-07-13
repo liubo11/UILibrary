@@ -10,6 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:configChanges="orientation|screenLayout|fontScale"
+            android:theme="@style/TestStyle"
             android:name=".MainActivity" >
             <!--android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale|uiMode"-->
 
