@@ -22,6 +22,11 @@
         </activity>
 
         <activity android:name=".TabActivity"></activity>
+        <activity android:name="com.demo.test.BaseTestPage"/>
+        <activity android:name="com.demo.test.PageA"/>
+        <activity android:name="com.demo.test.PageB"/>
+        <activity android:name="com.demo.test.PageC"/>
+
     </application>
 
 </manifest>

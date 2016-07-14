@@ -1,10 +1,14 @@
 package com.demo.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuView;
@@ -17,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.demo.test.BaseTestPage;
 import com.galaxywind.base.adapter.HeaderRecyclerAdapter;
 import com.galaxywind.base.adapter.LinearDecoration;
 import com.galaxywind.base.fragment.impl.ICtrlBar;
@@ -24,6 +29,7 @@ import com.galaxywind.base.fragment.impl.IMoreMenu;
 import com.galaxywind.base.ui.BaseActivity;
 import com.galaxywind.utils.ViewUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -32,17 +38,23 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
     private String title="123";
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);
         initMenuList(adapter);*/
-        long recorde = System.currentTimeMillis();
-        TypedArray array = getTheme().obtainStyledAttributes(new int[]{R.attr.theme_main_color});
-        int color = array.getColor(0, 0);
-        array.recycle();
-        System.out.println("xxxxxx time = "+(System.currentTimeMillis() - recorde)+" getcolor = "+Integer.toHexString(color));
+
+        int clearTask = Intent.FLAG_ACTIVITY_CLEAR_TASK;
+        int clearTop = Intent.FLAG_ACTIVITY_CLEAR_TOP;
+        int newTask = Intent.FLAG_ACTIVITY_NEW_TASK;
+        int singleTop = Intent.FLAG_ACTIVITY_SINGLE_TOP;
+
+
+
+        //WeakReference
+
 
         System.out.println("MainActivity onCreate !!");
     }
@@ -63,7 +75,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("click time");
-                BaseActivity.startActivity(v.getContext(), TabActivity.class);
+                //BaseActivity.startActivity(v.getContext(), TabActivity.class);
+                BaseActivity.startActivity(v.getContext(), BaseTestPage.class);
+                finish();
             }
         });
 
