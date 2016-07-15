@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.demo.data.ActionMessage;
 import com.demo.main.R;
 import com.galaxywind.base.ui.BaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -93,7 +96,7 @@ public class BaseTestPage extends BaseActivity {
         }
 
         if (time != null) {
-            System.out.println(TAG+"time="+time+",name="+name+", mode="+Integer.toHexString(mode));
+            System.out.println(TAG+"onCreate time="+time+",name="+name+", mode="+Integer.toHexString(mode));
         } else {
             System.out.println(TAG+"onCreate Base Test Page");
         }
@@ -110,7 +113,8 @@ public class BaseTestPage extends BaseActivity {
         findViewById(R.id.start_a).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTestActivity(0, BaseTestPage.this, PageA.class);
+                EventBus.getDefault().post(new ActionMessage(1));
+                //startTestActivity(0, BaseTestPage.this, PageA.class);
             }
         });
         findViewById(R.id.start_b).setOnClickListener(new View.OnClickListener() {
@@ -122,7 +126,7 @@ public class BaseTestPage extends BaseActivity {
         findViewById(R.id.start_c).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTestActivity(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK, BaseTestPage.this, PageB.class);
+                startTestActivity(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK, BaseTestPage.this, PageC.class);
             }
         });
     }

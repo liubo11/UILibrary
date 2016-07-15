@@ -2,7 +2,7 @@
 <resources>
 
     <style name="TestStyle" parent="AppTheme">
-        <item name="theme_main_color">@color/theme_color</item>
+        <!--<item name="theme_main_color">@color/theme_color</item>-->
     </style>
 
 </resources>

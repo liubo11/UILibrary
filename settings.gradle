@@ -1,1 +1,1 @@
-include ':app', ':baseuilib', ':basedialoglib'
+include ':app', ':baseuilib', ':basedialoglib', ':mytestjavalib'

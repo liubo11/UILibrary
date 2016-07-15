@@ -27,6 +27,7 @@ import com.galaxywind.base.adapter.LinearDecoration;
 import com.galaxywind.base.fragment.impl.ICtrlBar;
 import com.galaxywind.base.fragment.impl.IMoreMenu;
 import com.galaxywind.base.ui.BaseActivity;
+import com.galaxywind.utils.ThemeUtils;
 import com.galaxywind.utils.ViewUtils;
 
 import java.lang.ref.WeakReference;
@@ -45,6 +46,8 @@ public class MainActivity extends BaseActivity {
         /*MyRecyclerAdapter adapter = new MyRecyclerAdapter(30);
         adapter.setHeaderView(R.layout.test_menu_header);
         initMenuList(adapter);*/
+
+        startService(new Intent(this, MyService.class));
 
         int clearTask = Intent.FLAG_ACTIVITY_CLEAR_TASK;
         int clearTop = Intent.FLAG_ACTIVITY_CLEAR_TOP;
