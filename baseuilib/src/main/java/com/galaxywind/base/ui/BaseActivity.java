@@ -1,3 +1,9 @@
+/*
+*Copyright@ GALAXYWIND Network Systems Co.Ltd.
+*Function: BaseActivity
+*Creator: LiuBo
+*Create time: 2016-06-29
+*/
 package com.galaxywind.base.ui;
 
 import android.content.Context;
@@ -23,9 +29,10 @@ import com.galaxywind.base.fragment.FragmentFactory;
 import com.galaxywind.base.fragment.impl.ICtrlBar;
 import com.galaxywind.base.fragment.impl.IMoreMenu;
 import com.galaxywind.utils.AppTimeUtils;
+import com.galaxywind.utils.ThemeUtils;
 
 /**
- * Created by Administrator on 2016-06-29.
+ * @since 2016-06-29
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -93,13 +100,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public void setContentView(View view) {
+    public void setContentView(@NonNull View view) {
         super.setContentView(R.layout.layout_base_activity);
         setContent_(view, null);
     }
 
     @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
+    public void setContentView(@NonNull View view, ViewGroup.LayoutParams params) {
         super.setContentView(R.layout.layout_base_activity);
         setContent_(view, params);
     }
@@ -148,7 +155,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * <p> initField()
      * @param barStyle
      */
-    final protected void setCtrlBarStyle(@NonNull  CtrlBarStyle barStyle) {
+    final protected void setCtrlBarStyle(@NonNull CtrlBarStyle barStyle) {
         this.mBarStyle = barStyle;
     }
 
@@ -160,9 +167,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        boolean fullScreen = ThemeUtils.getBoolean(this, R.attr.fmwk_style_fullscreen);
+        if (fullScreen) {
+            setCtrlBarStyle(CtrlBarStyle.NONE);
+        }
     }
 
-    private void setContent_(View view, ViewGroup.LayoutParams params) {
+    private void setContent_(@NonNull View view, ViewGroup.LayoutParams params) {
         ViewGroup viewGroup = (ViewGroup) findViewById(R.id.container);
         if (null != params) {
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(params);

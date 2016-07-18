@@ -78,9 +78,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("click time");
-                //BaseActivity.startActivity(v.getContext(), TabActivity.class);
-                BaseActivity.startActivity(v.getContext(), BaseTestPage.class);
-                finish();
+                BaseActivity.startActivity(v.getContext(), TabActivity.class);
+                //BaseActivity.startActivity(v.getContext(), BaseTestPage.class);
+                //finish();
             }
         });
 

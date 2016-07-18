@@ -1,3 +1,9 @@
+/*
+*Copyright@ GALAXYWIND Network Systems Co.Ltd.
+*Function: BaseTabActivity
+*Creator: LiuBo
+*Create time: 2016-06-29
+*/
 package com.galaxywind.base.ui;
 
 import android.support.annotation.LayoutRes;
@@ -15,7 +21,7 @@ import java.util.List;
 
 
 /**
- * Created by Administrator on 2016-06-29.
+ * @since 2016-06-29
  */
 public abstract class BaseTabActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
     protected TabLayout mTablayout;
@@ -68,7 +74,6 @@ public abstract class BaseTabActivity extends BaseActivity implements TabLayout.
 
     @Override
     protected void initView() {
-
     }
 
     @Override
@@ -76,5 +81,9 @@ public abstract class BaseTabActivity extends BaseActivity implements TabLayout.
     }
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
+    }
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mViewPager.setCurrentItem(tab.getPosition());
     }
 }

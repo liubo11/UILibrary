@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fmwk_style_fullscreen" format="boolean"></attr>
+    <!--标记的大小 圆形标记的直径-->
+    <attr name="fmwk_control_bar_mark_size" format="dimension"></attr>
+    <!--中间标题的字体大小-->
+    <attr name="fmwk_control_bar_title_text_size" format="dimension"></attr>
+    <!--文字item的字体大小-->
+    <attr name="fmwk_control_bar_item_text_size" format="dimension"></attr>
+    <!--文字item的字体颜色-->
+    <attr name="fmwk_control_bar_item_text_color" format="color"></attr>
+    <!--item的点击效果-->
+    <attr name="fmwk_control_bar_item_selector" format="reference"></attr>
+    <!--背景颜色-->
+    <attr name="fmwk_control_bar_background_color" format="color"></attr>
+</resources>

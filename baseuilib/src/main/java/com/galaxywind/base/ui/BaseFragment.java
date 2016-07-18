@@ -1,8 +1,15 @@
+/*
+*Copyright@ GALAXYWIND Network Systems Co.Ltd.
+*Function: BaseFragment
+*Creator: LiuBo
+*Create time: 2016-06-29
+*/
 package com.galaxywind.base.ui;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,14 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Administrator on 2016-06-29.
+ * @since 2016-06-29
  */
 public abstract class BaseFragment extends Fragment {
     protected ViewGroup mContainer;
     protected View mRootView;
 
     private int mRootLayout;
-
     protected Bundle mExtra;
 
     @Override
@@ -53,7 +59,7 @@ public abstract class BaseFragment extends Fragment {
     protected void setContentView(@LayoutRes int layout) {
         this.mRootLayout = layout;
     }
-    protected void setContentView(View view) {
+    protected void setContentView(@NonNull View view) {
         this.mRootView = view;
     }
 

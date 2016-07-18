@@ -225,15 +225,8 @@ public class ControlBarFragment extends BaseFragment implements ICtrlBar {
             this.mListener = listener;
         }
 
-        void setOnClickListener(View.OnClickListener listener) {
-            mListener = listener;
-        }
-
         void showMark(int color) {
             //TODO
-        }
-        void setResId(int res) {
-            mResId = res;
         }
         abstract View inflateView(LayoutInflater inflater, ViewGroup parent, boolean attach);
     }

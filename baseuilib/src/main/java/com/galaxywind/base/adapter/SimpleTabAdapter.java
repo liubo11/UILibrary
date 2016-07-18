@@ -19,7 +19,6 @@ public class SimpleTabAdapter extends FragmentStatePagerAdapter{
         this.mPagers = pagers;
     }
 
-
     @Override
     public Fragment getItem(int position) {
         return mPagers.get(position);
@@ -34,6 +33,4 @@ public class SimpleTabAdapter extends FragmentStatePagerAdapter{
     public CharSequence getPageTitle(int position) {
         return "Page "+position;
     }
-
-
 }

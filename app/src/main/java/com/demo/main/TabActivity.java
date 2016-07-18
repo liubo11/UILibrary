@@ -61,6 +61,8 @@ public class TabActivity extends BaseTabActivity {
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
+        super.onTabSelected(tab);
+
         Toast.makeText(this, tab.getText(), Toast.LENGTH_SHORT).show();
     }
 }

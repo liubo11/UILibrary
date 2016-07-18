@@ -1,28 +1,22 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <item name="android:windowFullscreen">true</item>
+    <style name="BaseLightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
 
+        <item name="fmwk_style_fullscreen">false</item>
+        <item name="fmwk_control_bar_mark_size">@dimen/control_bar_mark_size</item>
+        <item name="fmwk_control_bar_title_text_size">@dimen/control_bar_title_text_size</item>
+        <item name="fmwk_control_bar_item_text_size">@dimen/control_bar_item_text_size</item>
+        <item name="fmwk_control_bar_item_text_color">@color/control_bar_item_text_color</item>
+        <item name="fmwk_control_bar_background_color">@color/control_bar_background_color</item>
+        <item name="fmwk_control_bar_item_selector">@drawable/base_ctrl_bar_item_selector</item>
     </style>
 
-    <style name="AppTheme1" parent="@android:style/Theme.NoTitleBar.Fullscreen">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="BaseLightTheme.Fullscreen" parent="BaseLightTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="fmwk_style_fullscreen">true</item>
+    </style>
 
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
+    <style name="AppTheme" parent="BaseLightTheme">
     </style>
 </resources>

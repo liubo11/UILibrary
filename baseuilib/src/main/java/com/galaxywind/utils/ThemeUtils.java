@@ -29,4 +29,11 @@ public class ThemeUtils {
         return resDrawable;
     }
 
+    public static boolean getBoolean(@NonNull BaseActivity context, @AttrRes int bool) {
+        TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{bool});
+        boolean resBool = ta.getBoolean(0, false);
+        ta.recycle();
+
+        return resBool;
+    }
 }

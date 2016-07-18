@@ -1,13 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="BaseLightTheme.Fullscreen" parent="BaseLightTheme">
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="fmwk_style_fullscreen">true</item>
     </style>
 
     <style name="AppTheme" parent="BaseLightTheme">
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 </resources>

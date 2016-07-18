@@ -7,9 +7,9 @@
     android:paddingLeft="@dimen/control_bar_text_padding"
     android:gravity="center"
     android:textStyle="bold"
-    android:textColor="@color/control_bar_item_text_color"
-    android:textSize="@dimen/control_bar_item_text_size"
-    android:background="@drawable/base_ctrl_bar_item_selecotr"
+    android:textColor="?attr/fmwk_control_bar_item_text_color"
+    android:textSize="?attr/fmwk_control_bar_item_text_size"
+    android:background="?attr/fmwk_control_bar_item_selector"
     android:paddingRight="@dimen/control_bar_text_padding">
 
 </TextView>
